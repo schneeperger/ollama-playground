@@ -77,7 +77,3 @@ This is a personal learning project, but feel free to open issues or suggestions
 9. License
 
 MIT — use it however you like.
-
----
-
-If you want, I can tailor this README to match your exact project structure, add diagrams, include code snippets, or make it more humorous, more formal, or more minimalistic.
