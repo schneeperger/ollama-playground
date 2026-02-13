@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using OllamaClient;
 using OllamaClient.Models;
 
@@ -13,36 +13,38 @@ var provider = services.BuildServiceProvider();
 
 var ollama = provider.GetRequiredService<IOllamaService>();
 
-
-
-// var messages = new List<OllamaMessage>
-// {
-//     new() { Role = "system", Content = "You're a helpful assitent."},
-//     new() { Role = "user", Content = "Hello, how are you?"}
-// };
-
-// var reply1 = await ollama.ChatAsync(messages);
-// Console.WriteLine("Assistant: " + reply1);
-
-// messages.Add(new OllamaMessage { Role = "assistant", Content = reply1 });
-// messages.Add(new OllamaMessage { Role = "user", Content = "What type of car should I buy if I need to use it as a boat?"});
-
-// var reply2 = await ollama.ChatAsync(messages);
-// Console.WriteLine("Assistant: " + reply2);
-
-// var answer = await ollama.AskAsync("what is the meaning of life?");
-
-// Console.WriteLine(answer);
-
 var history = new List<OllamaMessage>
 {
-    new() { Role = "user", Content = "Hello, who are you?" }
+    new() { Role = "system", Content = "You're a helpful assistant." }
 };
 
-await foreach (var token in ollama.ChatStreamAsync(history))
+Console.WriteLine("Chat with Ollama (type /stop to quit)\n");
+
+while (true)
 {
-    Console.Write(token);
-    await Task.Delay(70);
+    Console.Write("You: ");
+    var input = Console.ReadLine();
+
+    if (string.IsNullOrWhiteSpace(input))
+        continue;
+
+    if (input.Trim().Equals("/stop", StringComparison.OrdinalIgnoreCase))
+        break;
+
+    history.Add(new OllamaMessage { Role = "user", Content = input });
+
+    Console.Write("Assistant: ");
+    var reply = new System.Text.StringBuilder();
+
+    await foreach (var token in ollama.ChatStreamAsync(history))
+    {
+        Console.Write(token);
+        reply.Append(token);
+    }
+
+    Console.WriteLine();
+
+    history.Add(new OllamaMessage { Role = "assistant", Content = reply.ToString() });
 }
 
-Console.WriteLine("\nDone.");
+Console.WriteLine("Goodbye!");
