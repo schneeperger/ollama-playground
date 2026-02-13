@@ -1,4 +1,4 @@
-namespace OllamaPlayground.Models.Chat;
+namespace OllamaClient.Models;
 
 public class OllamaChatRequest
 {

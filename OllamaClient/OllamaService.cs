@@ -1,9 +1,8 @@
 using System.Net.Http.Json;
 using System.Text.Json;
-using OllamaPlayground.Models;
-using OllamaPlayground.Models.Chat;
+using OllamaClient.Models;
 
-namespace OllamaPlayground.Services;
+namespace OllamaClient;
 
 public class OllamaService : IOllamaService
 {
@@ -12,30 +11,7 @@ public class OllamaService : IOllamaService
     public OllamaService(HttpClient http)
     {
         _http = http;
-        _http.BaseAddress = new Uri("http://localhost:11434");
     }
-
-    // public async Task<string> AskAsync(string prompt, string model = "llama3.2")
-    // {
-    //     var request = new OllamaRequest
-    //     {
-    //         model = model,
-    //         prompt = prompt,
-    //         stream = false
-    //     };
-
-    //     var response = await _http.PostAsJsonAsync("/api/generate", request);
-
-    //     if (!response.IsSuccessStatusCode)
-    //     {
-    //         var error = await response.Content.ReadAsStringAsync();
-    //         throw new Exception($"Ollama error: {error}");
-    //     }
-
-    //     var result = await response.Content.ReadFromJsonAsync<OllamaResponse>();
-
-    //     return result?.Response ?? string.Empty;
-    // }
 
     public async Task<string> ChatAsync(List<OllamaMessage> messages, string model = "llama3.2")
     {
@@ -61,7 +37,6 @@ public class OllamaService : IOllamaService
 
     public async IAsyncEnumerable<string> ChatStreamAsync(List<OllamaMessage> messages, string model = "llama3.2", CancellationToken cancellationToken = default)
     {
-        Console.WriteLine("ay caramba");
         var request = new
         {
             model,
@@ -86,13 +61,7 @@ public class OllamaService : IOllamaService
             if (string.IsNullOrWhiteSpace(line))
                 continue;
 
-            // Each line is a JSON object representing a chunk
             var chunk = JsonSerializer.Deserialize<OllamaChatResponse>(line, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            // Console.WriteLine($"DESERIALIZED: role={chunk?.Message?.Role}, content='{chunk?.Message?.Content}'");
-
-
-            // Console.WriteLine($"RAW: {line}"); // <--- add this temporarily
-
 
             if (chunk?.Message?.Content is { Length: > 0 } token)
                 yield return token;

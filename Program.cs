@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OllamaPlayground.Services;
-using OllamaPlayground.Models.Chat;
+using OllamaClient;
+using OllamaClient.Models;
 
 var services = new ServiceCollection();
 

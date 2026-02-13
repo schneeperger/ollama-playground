@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="OllamaClient\**" />
+    <Content Remove="OllamaClient\**" />
+    <EmbeddedResource Remove="OllamaClient\**" />
+    <None Remove="OllamaClient\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="OllamaClient\OllamaClient.csproj" />
   </ItemGroup>
 
 </Project>

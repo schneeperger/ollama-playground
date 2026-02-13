@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace OllamaPlayground.Models.Chat;
+namespace OllamaClient.Models;
 
 public class OllamaChatResponse
 {
