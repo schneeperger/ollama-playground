@@ -1,7 +1,3 @@
-Here’s a polished, friendly, and developer‑oriented README you can drop straight into your repo. It sets the right tone for a learning project while still looking professional and inviting.
-
----
-
 1. Simple Ollama Integration (Learning Project)
 
 A lightweight C# playground for experimenting with **Ollama**, **local LLMs**, and **streaming chat interactions**.  
