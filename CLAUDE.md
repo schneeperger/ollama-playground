@@ -31,3 +31,5 @@ Reusable client library for the Ollama REST API (`/api/chat`). Namespace: `Ollam
 Demo/experimentation app that references `OllamaClient`. DI setup in `Program.cs` registers `IOllamaService`/`OllamaService` via `AddHttpClient` with base address `http://localhost:11434`.
 
 `Models/OllamaRequest.cs` and `Models/OllamaResponse.cs` are legacy DTOs for the `/api/generate` endpoint (currently unused).
+
+# when commiting changes do not append anything to the original messaga. That said nothing that starts with 'Co-Authored-By:'
