@@ -4,7 +4,7 @@ namespace OllamaPlayground.Models;
 // Currently unused — kept for potential future use with the generate API.
 public class OllamaResponse
 {
-    public string Model { get; set; }
-    public string Response { get; set; }
+    public required string Model { get; set; }
+    public required string Response { get; set; }
     public bool Done { get; set; }
 }

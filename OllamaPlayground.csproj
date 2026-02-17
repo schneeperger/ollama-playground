@@ -22,4 +22,10 @@
     <ProjectReference Include="OllamaClient\OllamaClient.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="documents\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

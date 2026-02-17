@@ -1,0 +1,39 @@
+Acme Widget Corporation — Internal Knowledge Base
+
+Product Line Overview
+Acme Widget Corporation manufactures three product lines: the WidgetPro series,
+the WidgetLite series, and the WidgetMax industrial series.
+
+WidgetPro Series
+The WidgetPro 3000 was released in Q2 2024. It features a titanium housing,
+40-hour battery life, and is compatible with the Acme Connect mobile app version
+4.2 and above. The recommended retail price is $349 USD. The WidgetPro 3000 is
+available in Midnight Blue, Arctic White, and Graphite.
+
+WidgetLite Series
+The WidgetLite is our entry-level offering, priced at $129 USD. It has a
+plastic housing, 18-hour battery life, and connects via Bluetooth 5.1.
+It is not compatible with the Acme Connect app but works with standard
+Bluetooth audio profiles.
+
+WidgetMax Industrial Series
+The WidgetMax is designed for factory floor use. It features an IP68 waterproof
+rating, a 72-hour battery, and integrates with Acme's enterprise fleet management
+software. Minimum order quantity is 50 units. Contact enterprise-sales@acme.example
+for pricing.
+
+Support Policy
+All Acme products come with a 2-year warranty. Warranty claims must be submitted
+through the Acme support portal at support.acme.example within 30 days of the defect
+being discovered. Proof of purchase is required. The warranty does not cover
+physical damage or water damage for non-WidgetMax models.
+
+Frequently Asked Questions
+Q: Can I use the WidgetPro 3000 underwater?
+A: No. The WidgetPro 3000 is splash-resistant (IPX4) but not waterproof. Only the
+WidgetMax carries a full IP68 waterproof rating.
+
+Q: What is the return policy?
+A: Products may be returned within 14 days of purchase for a full refund, provided
+they are in original condition with all packaging. After 14 days, warranty service
+applies for defects.

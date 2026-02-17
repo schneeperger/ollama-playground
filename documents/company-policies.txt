@@ -1,0 +1,37 @@
+Acme Widget Corporation — Employee Handbook (Excerpt)
+
+Remote Work Policy
+As of January 2025, all Acme employees are eligible for hybrid work. Engineering
+and product teams work from the office Tuesday through Thursday. Monday and Friday
+are remote-optional. Fully remote arrangements require VP-level approval and are
+limited to employees with at least 18 months of tenure.
+
+Remote workers must be available on Slack between 9:00 AM and 3:00 PM in their
+local time zone. All-hands meetings are held the first Monday of each month at
+10:00 AM Pacific Time via Zoom.
+
+Expense Policy
+Travel expenses must be pre-approved by the employee's direct manager. Receipts
+are required for any expense over $25 USD. Meal reimbursement is capped at $75 per
+day for domestic travel and $100 per day for international travel. Alcohol is not
+reimbursable. Expense reports must be submitted within 14 days of the trip ending.
+
+Software and tool subscriptions up to $50/month can be purchased without approval.
+Anything above $50/month requires manager approval. Annual subscriptions over $500
+require finance team sign-off.
+
+PTO Policy
+Full-time employees receive 20 days of paid time off per year, accrued monthly.
+PTO does not roll over — unused days expire on December 31st. Employees must give
+at least 2 weeks notice for PTO requests of 5 or more consecutive days. PTO of
+1-4 days requires 3 business days notice.
+
+Sick leave is separate from PTO: employees receive 10 sick days per year. Sick
+leave longer than 3 consecutive days requires a doctor's note. Unused sick days
+do roll over, up to a maximum of 30 accumulated days.
+
+Parental Leave
+Primary caregivers receive 16 weeks of fully paid parental leave. Secondary
+caregivers receive 6 weeks. Parental leave must begin within 12 months of the
+child's birth or adoption date. Employees may request a part-time transition
+period of up to 4 weeks upon returning from parental leave.

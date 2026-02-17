@@ -1,0 +1,45 @@
+Acme Widget Corporation — Troubleshooting Guide
+
+WidgetPro 3000 Won't Turn On
+1. Ensure the device has been charged for at least 30 minutes using the included
+   USB-C cable and a 20W or higher power adapter.
+2. Press and hold the power button for 10 seconds to perform a hard reset.
+3. If the LED indicator does not light up after the hard reset, try a different
+   USB-C cable. Third-party cables shorter than 1 meter sometimes fail to deliver
+   sufficient power.
+4. If none of the above works, the battery may be defective. Contact support at
+   support.acme.example and reference error code WP3K-BOOT-001.
+
+WidgetPro 3000 Disconnects from Acme Connect App
+1. Verify that your phone is running iOS 16+ or Android 13+. Older OS versions
+   are not supported by Acme Connect 4.2.
+2. Ensure Bluetooth is enabled and the WidgetPro is within 10 meters of your phone.
+3. In the Acme Connect app, go to Settings > Devices > Forget Device, then re-pair.
+4. If the issue persists, factory reset the WidgetPro by holding the power button
+   and the volume-down button simultaneously for 15 seconds. The LED will flash
+   red three times to confirm the reset.
+5. After factory reset, update the firmware via Acme Connect > Settings > Firmware
+   Update. Version 2.4.1 or later resolves known Bluetooth stability issues.
+
+WidgetLite Battery Drains Quickly
+1. Check if the WidgetLite firmware is up to date. Firmware 1.3.0 fixed a bug that
+   caused excessive battery drain in Bluetooth scanning mode.
+2. Disable "Always Discoverable" mode: press the Bluetooth button twice quickly.
+   The LED will change from blinking blue to solid blue, confirming discoverable
+   mode is off.
+3. Normal battery life is 18 hours with moderate use. Continuous audio streaming
+   reduces battery life to approximately 12 hours. If the battery depletes in
+   under 8 hours, it may be defective — contact support with error code WL-BAT-001.
+
+WidgetMax Not Detected by Fleet Management Software
+1. Confirm the WidgetMax is running enterprise firmware (version prefix "E-").
+   Consumer firmware (version prefix "C-") is not compatible with fleet management.
+2. Ensure the WidgetMax is connected to the same network subnet as the fleet
+   management server. The discovery protocol uses UDP broadcast on port 5353 and
+   does not work across VLANs without mDNS relay configuration.
+3. Check that the fleet management server is running version 3.1 or later. Earlier
+   versions do not support the WidgetMax hardware revision 2 (shipped after
+   September 2024).
+4. If the WidgetMax appears in the server but shows "offline," restart the device
+   and check the network cable. The WidgetMax uses a proprietary waterproof RJ-45
+   connector — standard cables require the Acme WM-ADAPT-01 adapter ($12 USD).
