@@ -12,6 +12,10 @@
     <Content Remove="OllamaClient\**" />
     <EmbeddedResource Remove="OllamaClient\**" />
     <None Remove="OllamaClient\**" />
+    <Compile Remove="OllamaPlayground.Tests\**" />
+    <Content Remove="OllamaPlayground.Tests\**" />
+    <EmbeddedResource Remove="OllamaPlayground.Tests\**" />
+    <None Remove="OllamaPlayground.Tests\**" />
   </ItemGroup>
 
   <ItemGroup>
