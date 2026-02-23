@@ -1,29 +1,26 @@
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
 using OllamaClient.Models;
 
 namespace OllamaClient;
 
-public class OllamaService : IOllamaService
+public class OllamaService(HttpClient http, IOptions<OllamaSettings> options) : IOllamaService
 {
-    private readonly HttpClient _http;
+    private readonly OllamaSettings _settings = options.Value;
 
-    public OllamaService(HttpClient http)
-    {
-        _http = http;
-    }
-
-    public async Task<string> ChatAsync(List<OllamaMessage> messages, string model = "llama3.2")
+    public async Task<string> ChatAsync(List<OllamaMessage> messages, string? model = null)
     {
         var request = new OllamaChatRequest
         {
-            Model = model,
+            Model = model ?? _settings.ChatModel,
             Messages = messages,
             Stream = false
         };
 
-        var response = await _http.PostAsJsonAsync("/api/chat", request);
+        var response = await http.PostAsJsonAsync("/api/chat", request);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -36,20 +33,20 @@ public class OllamaService : IOllamaService
         return result?.Message.Content ?? string.Empty;
     }
 
-    public async IAsyncEnumerable<string> ChatStreamAsync(List<OllamaMessage> messages, string model = "llama3.2", [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<string> ChatStreamAsync(List<OllamaMessage> messages, string? model = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         var request = new
         {
-            model,
+            model = model ?? _settings.ChatModel,
             messages,
             stream = true
         };
 
-        using var response = await _http.PostAsJsonAsync(
-            "/api/chat",
-            request,
-            cancellationToken);
+        var json = JsonSerializer.Serialize(request);
+        using var content = new StringContent(json, Encoding.UTF8, "application/json");
+        using var httpRequest = new HttpRequestMessage(HttpMethod.Post, "/api/chat") { Content = content };
 
+        using var response = await http.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
@@ -57,7 +54,7 @@ public class OllamaService : IOllamaService
 
         while (!reader.EndOfStream && !cancellationToken.IsCancellationRequested)
         {
-            var line = await reader.ReadLineAsync();
+            var line = await reader.ReadLineAsync(cancellationToken);
 
             if (string.IsNullOrWhiteSpace(line))
                 continue;
@@ -72,15 +69,15 @@ public class OllamaService : IOllamaService
         }
     }
 
-    public async Task<float[]> EmbedAsync(string text, string model = "nomic-embed-text")
+    public async Task<float[]> EmbedAsync(string text, string? model = null)
     {
         var request = new OllamaEmbedRequest
         {
-            Model = model,
+            Model = model ?? _settings.EmbedModel,
             Input = [text]
         };
 
-        var response = await _http.PostAsJsonAsync("/api/embed", request);
+        var response = await http.PostAsJsonAsync("/api/embed", request);
 
         if (!response.IsSuccessStatusCode)
         {

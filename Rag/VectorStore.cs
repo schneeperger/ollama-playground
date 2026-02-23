@@ -1,6 +1,6 @@
 namespace OllamaPlayground.Rag;
 
-public class VectorStore
+public class VectorStore : IVectorStore
 {
     private readonly List<DocumentChunk> _chunks = [];
 

@@ -1,16 +1,7 @@
 namespace OllamaPlayground.Rag;
 
-public class DocumentLoader
+public class DocumentLoader(int chunkSize = 150, int chunkOverlap = 20) : IDocumentLoader
 {
-    private readonly int _chunkSize;
-    private readonly int _chunkOverlap;
-
-    public DocumentLoader(int chunkSize = 150, int chunkOverlap = 20)
-    {
-        _chunkSize = chunkSize;
-        _chunkOverlap = chunkOverlap;
-    }
-
     public IEnumerable<DocumentChunk> LoadFolder(string folderPath)
     {
         foreach (var filePath in Directory.EnumerateFiles(folderPath, "*.txt"))
@@ -29,13 +20,13 @@ public class DocumentLoader
             [' ', '\t', '\n', '\r'],
             StringSplitOptions.RemoveEmptyEntries);
 
-        int index = 0;
-        int chunkIndex = 0;
-        int step = _chunkSize - _chunkOverlap;
+        var index = 0;
+        var chunkIndex = 0;
+        var step = chunkSize - chunkOverlap;
 
         while (index < words.Length)
         {
-            var chunkWords = words.Skip(index).Take(_chunkSize);
+            var chunkWords = words.Skip(index).Take(chunkSize);
             var chunkText = string.Join(" ", chunkWords);
 
             yield return new DocumentChunk(chunkText, fileName, chunkIndex, []);

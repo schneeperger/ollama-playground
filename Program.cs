@@ -1,23 +1,33 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OllamaClient;
 using OllamaClient.Models;
 using OllamaPlayground.Rag;
 
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(AppContext.BaseDirectory)
+    .AddJsonFile("appsettings.json", optional: false)
+    .Build();
+
 var services = new ServiceCollection();
+
+services.Configure<OllamaSettings>(configuration.GetSection("Ollama"));
 
 services.AddHttpClient<IOllamaService, OllamaService>(client =>
 {
-  client.BaseAddress = new Uri("http://localhost:11434");
+    var baseUrl = configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
+    client.BaseAddress = new Uri(baseUrl);
 });
 
-services.AddSingleton<VectorStore>();
-services.AddSingleton<DocumentLoader>();
-services.AddSingleton<RagService>();
+services.AddSingleton<IVectorStore, VectorStore>();
+services.AddSingleton<IDocumentLoader, DocumentLoader>();
+services.AddSingleton<IRagService, RagService>();
 
-var provider = services.BuildServiceProvider();
+await using var provider = services.BuildServiceProvider();
 
-var ollama = provider.GetRequiredService<IOllamaService>();
-var ragService = provider.GetRequiredService<RagService>();
+using var scope = provider.CreateScope();
+var ollama = scope.ServiceProvider.GetRequiredService<IOllamaService>();
+var ragService = scope.ServiceProvider.GetRequiredService<IRagService>();
 
 // Index all .txt documents on startup
 var documentsFolder = Path.Combine(AppContext.BaseDirectory, "documents");
